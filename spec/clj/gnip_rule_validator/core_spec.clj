@@ -18,17 +18,17 @@
   (should= true  (insta/failure? (validate-rule rule))))
 
 
-(describe "Gnip validator "
-  (it "should accept single character"
+(describe "Gnip validator should "
+  (it "accept single character"
     (accept "h"))
 
-  (it "should NOT accept single #"
+  (it "NOT accept single #"
     (not-accept "#"))
   
-  (it "should NOT accept single @"
+  (it "NOT accept single @"
     (not-accept "@"))
 
-  (it "should accept all combination"
+  (it "accept all combination"
     (accept test-all))
 
   (it "NOT accept single @" 
