@@ -9,18 +9,13 @@
 (def test-all "(gnip OR from:688583 OR @gnip OR datasift) (\"powertrack -operators\" OR (-\"streaming code\"~4 foo OR bar)) -contains:help has:links url_contains:github")
 (def test-simple "lang:en has:lang:italian -hello (lang:en word) \"hello\" buba")
 
-(def vis? true)
 
 
 (defn accept [rule] 
-  (let [result (validate-rule rule)
-        viz    (if vis? (insta/visualize result) nil)
-        break  (read-line)
-  ]
-  (should-not= nil result)))
+  (should= false (insta/failure? (validate-rule rule))))
 
 (defn not-accept [rule] 
-  (insta/failure? (validate-rule rule)))
+  (should= true  (insta/failure? (validate-rule rule))))
 
 
 (describe "Gnip validator "
