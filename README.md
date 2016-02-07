@@ -8,7 +8,7 @@ Sample output using Instaparse/visualize (based on Rhizome):
 
 ## Testing
 
-TDD Spec suit is using (Specl)[https://github.com/Engelberg/instaparse]
+TDD Spec suit is using [Specl](https://github.com/Engelberg/instaparse)
 ``` 
 lein spec
 ```
