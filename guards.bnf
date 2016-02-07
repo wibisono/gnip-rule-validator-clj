@@ -1,2 +1,2 @@
-GUARDS =  (STOPWORDS blank*)+ | ( '-' QUOTED blank*)+ | ('-' KEYWORD blank*)+ | ( '-' OPERATOR blank* )+ | ( '-(' RULES ')' blank* )+
+GUARDS =  (stopwords _ )+ | ( '-' QUOTED _ )+ | ('-' KEYWORD _ )+ | ( '-' OPERATOR _ )+ | ( '-(' RULES ')' _ )+
 

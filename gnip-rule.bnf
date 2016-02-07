@@ -1,18 +1,19 @@
-RULES     = RULE (<blank*> RULE | (<blank*> OR <blank*> !'-' RULE))*
-RULE 	  = '-'? (OPERATOR | KEYWORD | QUOTED |  '(' RULES ')' )
+RULES     = RULE ( _ RULE | ( _ OR _ !NOT RULE))*
+<RULE> 	  = NOT? (OPERATOR | KEYWORD | QUOTED |  '(' RULES ')' )
 
-QUOTED    = '"' ('-'? KEYWORD <blank*>)+ '"' ('~' number)?
-<KEYWORD> = #'[#@]'? word (word | spec_word)*
+QUOTED    = '"' (NOT? KEYWORD _ )+ '"' ('~' numbers)?
+KEYWORD   = #'[#@]'? word (word | spec_word)*
 
-OPERATOR  = OP (':' word)?
+OPERATOR  = op (':' word)?
 
-spec_word = #"[!%&\*+-.'/;<=>?,#@]+" 
-word	  = !OR #"[a-zA-Z0-9_]+" 
+<spec_word> = #"[!%&\*+-.'/;<=>?,#@]+" 
+<word>      = !OR #"[a-zA-Z0-9_]+" 
 
+NOT	  = '-'
 OR	  = #'\bOR\b' 
 
-number    = #"[0-9]+"
-blank     = #'\s'
+numbers   = #"[0-9]+"
+<_>       = <#"\s*">
 
-<OP>	  = ('contains' | 'from' | 'url_contains' | 'has:links' | 'lang' | 'has:lang' | 'sample')+
-STOPWORDS = ('a' | 'an' | 'and' | 'at' | 'but' | 'by' | 'com' | 'from' | 'http' | 'https' | 'if' | 'in' | 'is' | 'it' | 'its' | 'me' | 'my' | 'or' | 'rt' | 'the' | 'this' | 'to' | 'too' | 'via' | 'we' | 'www' | 'you')+
+<op>	  = ('contains' | 'from' | 'url_contains' | 'has:links' | 'lang' | 'has:lang' | 'sample')+
+stopwords = ('a' | 'an' | 'and' | 'at' | 'but' | 'by' | 'com' | 'from' | 'http' | 'https' | 'if' | 'in' | 'is' | 'it' | 'its' | 'me' | 'my' | 'or' | 'rt' | 'the' | 'this' | 'to' | 'too' | 'via' | 'we' | 'www' | 'you')+
