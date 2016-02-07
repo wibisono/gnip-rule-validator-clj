@@ -1,7 +1,7 @@
 RULES     = RULE (<blank*> RULE | (<blank*> OR <blank*> !'-' RULE))*
 RULE 	  = '-'? (OPERATOR | KEYWORD | QUOTED |  '(' RULES ')' )
 
-QUOTED    = '"' ('-'? KEYWORD blank*)+ '"' ('~' number)?
+QUOTED    = '"' ('-'? KEYWORD <blank*>)+ '"' ('~' number)?
 <KEYWORD> = #'[#@]'? word (word | spec_word)*
 
 OPERATOR  = OP (':' word)?
