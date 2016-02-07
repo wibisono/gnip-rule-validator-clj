@@ -4,5 +4,5 @@ Main rule definition is in [gnip-rule.bnf](https://github.com/wibisono/gnip-rule
 
 Sample output using Instaparse/visualize (based on Rhizome):
 
-<img src="images/gnip-rule.pgn" >
+<img src="images/gnip-rule.png" >
 
