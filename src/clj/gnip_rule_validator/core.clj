@@ -3,12 +3,15 @@
   (:gen-class)
 )
 
+(def gnip-def   (slurp "gnip-rule.bnf"))
+(def guards-def (slurp "guards.bnf"))
+
 (def gnip-parser 
-     (insta/parser "gnip-rule.bnf")
+     (insta/parser gnip-def)
 )
 
 (def guard-parser
-    (insta/parser "guards.bnf"))
+    (insta/parser  (str guards-def gnip-def)))
 
 (defn succeed? [parser rule]
     (not (insta/failure? (parser rule))))
