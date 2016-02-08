@@ -283,10 +283,15 @@
       (not-accept "OR bla")
    )
  
-  (it "NOT accept negated OR" 
-      (not-accept "this OR -that")
+  (it "accept OR with one positive" 
+      (accept "bing OR bing OR -bang")
+   )
+
+  (it "NOT accept OR with all negatives" 
+      (not-accept "-bing OR -bang OR -bang")
    )
  
+
   (it "accept OR" 
       (accept "this OR that")
    )

@@ -1,5 +1,6 @@
-RULES     = RULE ( _ RULE | ( _ OR _ !NOT RULE))*
-<RULE> 	  = NOT? (OPERATOR | KEYWORD | QUOTED |  '(' RULES ')' )
+RULES     = (NOT? RULE _  | OR_RULE _ )+
+OR_RULE	  = (NOT? RULE _ OR _ )* RULE ( _ OR _ NOT? RULE )*
+RULE 	  = (OPERATOR | KEYWORD | QUOTED |  '(' _ RULES _ ')' )
 
 QUOTED    = '"' (NOT? KEYWORD _ )+ '"' ('~' numbers)?
 KEYWORD   = #'[#@]'? word (word | spec_word)*
