@@ -1,17 +1,18 @@
-RULES     = (NOT? RULE _  | OR_RULE _ )+
-OR_RULE	  = (NOT? RULE _ OR _ )* RULE ( _ OR _ NOT? RULE )*
-RULE 	  = (OPERATOR | KEYWORD | QUOTED |  '(' _ RULES _ ')' )
+RULES   = (NOT? RULE _  | OR _ )+
+OR	= (NOT? RULE _ or _ )* RULE ( _ or _ NOT? RULE )+
+<RULE> 	= (OPERATOR | KEYWORD | QUOTED |  GROUPED )
 
+GROUPED   = '(' _ RULES _ ')'
 QUOTED    = '"' (NOT? KEYWORD _ )+ '"' ('~' numbers)?
 KEYWORD   = #'[#@]'? word (word | spec_word)*
 
 OPERATOR  = op (':' word)?
 
 <spec_word> = #"[!%&\*+-.'/;<=>?,#@]+" 
-<word>      = !OR #"[a-zA-Z0-9_]+" 
+<word>      = !or #"[a-zA-Z0-9_]+" 
 
-NOT	  = '-'
-OR	  = #'\bOR\b' 
+NOT	  = <'-'>
+<or>	  = <#'\bOR\b'>
 
 numbers   = #"[0-9]+"
 <_>       = <#"\s*">
