@@ -1,4 +1,6 @@
-Clojure [Instaparse](https://github.com/Engelberg/instaparse) port of original [Fastparse](https://github.com/jeroenr/gnip-rule-validator) version from [Jeroen](https://github.com/jeroenr).
+[![Build Status](https://travis-ci.org/wibisono/gnip-rule-validator-clj.svg?branch=master)](https://travis-ci.org/wibisono/gnip-rule-validator-clj)
+
+Clojure [Instaparse](https://github.com/Engelberg/instaparse) partial early version port of [Fastparse](https://github.com/jeroenr/gnip-rule-validator) version from [Jeroen](https://github.com/jeroenr).
 
 Main rule definition is in [gnip-rule.bnf](https://github.com/wibisono/gnip-rule-validator-clj/blob/master/gnip-rule.bnf) file.
 
