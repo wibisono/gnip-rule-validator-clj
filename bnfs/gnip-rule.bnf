@@ -1,0 +1,21 @@
+RULES   = (NOT? RULE _  | OR _ )+
+OR	= (NOT? RULE _ or _ )* RULE ( _ or _ NOT? RULE )+
+<RULE> 	= (OPERATOR | KEYWORD | QUOTED |  GROUPED )
+
+GROUPED   = '(' _ RULES _ ')'
+QUOTED    = '"' (NOT? KEYWORD _ )+ '"' ('~' numbers)?
+KEYWORD   = #'[#@]'? word (word | spec_word)*
+
+OPERATOR  = op (':' word)?
+
+<spec_word> = #"[!%&\*+-.'/;<=>?,#@]+" 
+<word>      = !or #"[a-zA-Z0-9_]+" 
+
+NOT	  = <'-'>
+<or>	  = <#'\bOR\b'>
+
+numbers   = #"[0-9]+"
+<_>       = <#"\s*">
+
+<op>	  = ('contains' | 'from' | 'url_contains' | 'has:links' | 'lang' | 'has:lang' | 'sample' | 'klout_score' | 'bio_contains' )+
+stopwords = ('a' | 'an' | 'and' | 'at' | 'but' | 'by' | 'com' | 'from' | 'http' | 'https' | 'if' | 'in' | 'is' | 'it' | 'its' | 'me' | 'my' | 'or' | 'rt' | 'the' | 'this' | 'to' | 'too' | 'via' | 'we' | 'www' | 'you')+

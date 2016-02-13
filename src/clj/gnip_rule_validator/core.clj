@@ -1,12 +1,12 @@
 (ns gnip-rule-validator.core
-  (:require [instaparse.core :as insta])
+  (:require [instaparse.core :as insta ])
   (:gen-class)
 )
 
-(def gnip-def   (slurp "gnip-rule.bnf"))
-(def guards-def (slurp "guards.bnf"))
+(def gnip-def   (slurp "bnfs/gnip-rule.bnf"))
+(def guards-def (slurp "bnfs/guards.bnf"))
 
-(def gnip-parser 
+(def gnip-parser
      (insta/parser gnip-def)
 )
 
@@ -20,7 +20,15 @@
     (if (succeed? guard-parser rule)
         false
         (succeed? gnip-parser rule)))
-        
-  
 
+
+
+(defn operator-rule [operator-file] (apply str (cons (str "\n" operator-file " = " ) (interpose " | " (clojure.string/split-lines (slurp operator-file))))))
+
+
+(defn get-operator-rules [] (map operator-rule (map str (rest (file-seq (clojure.java.io/file "operators/"))))))
+
+
+
+(get-operator-rules)
 
