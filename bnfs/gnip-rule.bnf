@@ -17,5 +17,4 @@ NOT	  = <'-'>
 numbers   = #"[0-9]+"
 <_>       = <#"\s*">
 
-<op>	  = ('contains' | 'from' | 'url_contains' | 'has:links' | 'lang' | 'has:lang' | 'sample' | 'klout_score' | 'bio_contains' )+
 stopwords = ('a' | 'an' | 'and' | 'at' | 'but' | 'by' | 'com' | 'from' | 'http' | 'https' | 'if' | 'in' | 'is' | 'it' | 'its' | 'me' | 'my' | 'or' | 'rt' | 'the' | 'this' | 'to' | 'too' | 'via' | 'we' | 'www' | 'you')+

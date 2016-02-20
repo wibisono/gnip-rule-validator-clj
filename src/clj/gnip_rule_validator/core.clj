@@ -6,29 +6,26 @@
 (def gnip-def   (slurp "bnfs/gnip-rule.bnf"))
 (def guards-def (slurp "bnfs/guards.bnf"))
 
-(def gnip-parser
-     (insta/parser gnip-def)
-)
+(defn slurp-operator [source] 
+  (str "\n<op> = ( '" (apply str (interpose "' | '" (clojure.string/split-lines 
+                                    (slurp (str "operators/" source)))))  "' )+" ))
 
-(def guard-parser
-    (insta/parser  (str guards-def gnip-def)))
+(def get-operator (memoize slurp-operator))
+
+(defn gnip-parser [source] 
+     (insta/parser (str gnip-def (get-operator source))))
+
+(defn guard-parser [source] 
+    (insta/parser  (str guards-def gnip-def (get-operator source))))
 
 (defn succeed? [parser rule]
     (not (insta/failure? (parser rule))))
 
-(defn validate-rule [rule]
-    (if (succeed? guard-parser rule)
+(defn validate-rule 
+  ([rule] (validate-rule rule "twitter"))
+  ([rule source]
+    (if (succeed? (guard-parser source) rule)
         false
-        (succeed? gnip-parser rule)))
+        (succeed? (gnip-parser source) rule))))
 
-
-
-(defn operator-rule [operator-file] (apply str (cons (str "\n" operator-file " = " ) (interpose " | " (clojure.string/split-lines (slurp operator-file))))))
-
-
-(defn get-operator-rules [] (map operator-rule (map str (rest (file-seq (clojure.java.io/file "operators/"))))))
-
-
-
-(get-operator-rules)
 
